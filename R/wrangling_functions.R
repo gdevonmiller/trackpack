@@ -28,7 +28,7 @@ wrangle_telonics <- function (path, tidy = TRUE) {
   }
   new_file <- do.call(rbind, csv_list)
   if (tidy) {
-    new_file <- tibble(newfile)
+    new_file <- tibble::tibble(new_file)
   }
   setwd(old)
   new_file
