@@ -2,8 +2,7 @@
 % Please edit documentation in R/wrangling_functions.R
 \name{wrangle_telonics}
 \alias{wrangle_telonics}
-\title{Sort through a directory of Telonics reports and read in a compiled dataset
-of most recent broadcasts.}
+\title{Compile Telonics Reports}
 \usage{
 wrangle_telonics(path, tidy = TRUE)
 }
@@ -13,8 +12,7 @@ wrangle_telonics(path, tidy = TRUE)
 \item{tidy}{Creates a tibble by default, \code{tidy = FALSE} returns a \code{data.frame}.}
 }
 \description{
-Sort through a directory of Telonics reports and read in a compiled dataset
-of most recent broadcasts.
+Compile Telonics Reports
 }
 \examples{
 wrangle_telonics(path = "~/telonics/reports")
