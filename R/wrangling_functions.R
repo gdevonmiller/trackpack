@@ -8,9 +8,10 @@
 #' wrangle_telonics(path = "~/telonics/reports", tidy = FALSE)
 #' @export
 
-
 wrangle_telonics <- function (path, tidy = TRUE) {
-  files <- list.files(path = path)
+  old <- getwd()
+  setwd(path)
+  files <- list.files()
   files <- subset(files, !grepl("kml", files))
   files <- subset(files, !grepl("Stat", files))
   new_files <- c()
@@ -29,5 +30,6 @@ wrangle_telonics <- function (path, tidy = TRUE) {
   if (tidy) {
     new_file <- tibble(newfile)
   }
+  setwd(old)
   new_file
 }
