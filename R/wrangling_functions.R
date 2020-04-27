@@ -21,7 +21,7 @@ wrangle_telonics <- function (path, tidy = TRUE) {
   }
   csv_list <- list()
   for (i in 1:length(new_files)) {
-    csv_list[[i]] <- read.csv(new_files[i], header = TRUE, skip = 23, na.strings = "", stringsAsFactors = FALSE)
+    csv_list[[i]] <- read.csv(new_files[i], header = TRUE, skip = 23, na.strings = "", stringsAsFactors = FALSE, row.names = FALSE)
     csv_list[[i]]$ctn <- gsub("([0-9]+).*$", "\\1", new_files[i])
   }
   new_file <- do.call(rbind, csv_list)
