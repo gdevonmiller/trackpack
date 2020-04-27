@@ -48,4 +48,4 @@ wrangle_telonics <- function (path, tidy = TRUE) {
 }
 
 
-d####################### NEXT IDEA: Meta_telonics -> write metadate based on telonics columns after cleaning.
+####################### NEXT IDEA: Meta_telonics -> write metadate based on telonics columns after cleaning.
