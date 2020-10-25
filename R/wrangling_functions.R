@@ -10,7 +10,7 @@
 wrangle_telonics <- function (path, tidy = TRUE) {
   old <- getwd()
   setwd(path)
-  files <- subset(list.files(), grepl("Condensed", list.files()))
+  files <- subset(list.files(), grepl("Complete", list.files()))
   new_files <- c()
   for (i in levels(as.factor(gsub("([0-9]+).*$", "\\1", files)))) {
     collar <- files[gsub("([0-9]+).*$", "\\1", files) == i]
@@ -21,10 +21,10 @@ wrangle_telonics <- function (path, tidy = TRUE) {
   }
   csv_list <- list()
   for (i in 1:length(new_files)) {
-    csv_list[[i]] <- read.csv(new_files[i], header = TRUE, skip = 23, na.strings = "", stringsAsFactors = FALSE)
+    csv_list[[i]] <- read.csv(new_files[i], header = TRUE, skip = 22, na.strings = "", stringsAsFactors = FALSE)
     csv_list[[i]]$ctn <- gsub("([0-9]+).*$", "\\1", new_files[i])
   }
-  new_file <- do.call(rbind, csv_list)
+  new_file <- do.call(dplyr::bind_rows, csv_list)
   if (tidy) {
     new_file <- tibble::tibble(new_file)
     message(paste0("\nOutput is a tibble of size ",
