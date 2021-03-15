@@ -10,7 +10,9 @@
 wrangle_telonics <- function (path, tidy = TRUE) {
   old <- getwd()
   setwd(path)
-  files <- subset(list.files(), grepl("Complete", list.files()))
+  broadcasts <- subset(list.files(), grepl("Complete", list.files()))
+  datalogs <- subset(list.files(), grepl("Datalog", list.files()))
+  files <- c(broadcasts, datalogs)
   new_files <- c()
   for (i in levels(as.factor(gsub("([0-9]+).*$", "\\1", files)))) {
     collar <- files[gsub("([0-9]+).*$", "\\1", files) == i]
