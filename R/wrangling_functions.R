@@ -14,8 +14,8 @@ wrangle_telonics <- function (path, tidy = TRUE) {
   datalogs <- subset(list.files(), grepl("Datalog", list.files()))
   files <- c(broadcasts, datalogs)
   new_files <- c()
-  for (i in levels(as.factor(gsub("([0-9]+).*$", "\\1", files)))) {
-    collar <- files[gsub("([0-9]+).*$", "\\1", files) == i]
+  for (i in levels(as.factor(sub("_.*", "", files)))) {
+    collar <- files[sub("_.*", "", files) == i]
     collar <- collar[as.numeric(gsub("([0-9]+).*$", "\\1", substr(collar, 9, 13))) ==
                        max(as.numeric(gsub("([0-9]+).*$", "\\1", substr(collar, 9, 13))))]
     message(paste0("Data from file ", collar, " was retrieved."))
@@ -24,7 +24,7 @@ wrangle_telonics <- function (path, tidy = TRUE) {
   csv_list <- list()
   for (i in 1:length(new_files)) {
     csv_list[[i]] <- read.csv(new_files[i], header = TRUE, skip = 22, na.strings = "", stringsAsFactors = FALSE)
-    csv_list[[i]]$ctn <- gsub("([0-9]+).*$", "\\1", new_files[i])
+    csv_list[[i]]$ctn <- sub("_.*", "", new_files[i])
   }
   new_file <- do.call(dplyr::bind_rows, csv_list)
   if (tidy) {
